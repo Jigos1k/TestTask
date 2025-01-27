@@ -52,7 +52,10 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        return view('product.edit', compact('product'));
+        $user = config('product.role');
+        $admin = $product->canEdit($user);
+        
+        return view('product.edit', compact('product', 'admin'));
     }
 
     /**
@@ -60,12 +63,6 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        $user = config('product.role');
-
-        if(!$product->canEdit($user) && $request->has('article'))
-        {
-            return redirect()->back();
-        }
 
         $this->validateRequest($request, $product->id);
 

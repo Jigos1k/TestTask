@@ -19,11 +19,13 @@
                             <label for="name">Name</label>
                             <input type="text" class="form-control" id="name" name="name" value="{{ old('name', $product->name) }}" required>
                         </div>
-                
-                        <div class="form-group mt-2">
-                            <label for="price">Article</label>
-                            <input type="text" class="form-control" id="article" name="article" value="{{ old('article', $product->article) }}" required>
-                        </div>
+                        
+                        @if ($admin)
+                            <div class="form-group mt-2">
+                                <label for="price">Article</label>
+                                <input type="text" class="form-control" id="article" name="article" value="{{ old('article', $product->article) }}" required>
+                            </div>
+                        @endif
                 
                         <div class="form-group mt-2">
                             <label for="status">Status</label>
